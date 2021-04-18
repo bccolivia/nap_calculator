@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Nap Calculator</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        
+            <h3>Wake window lengths (required)</h3><p>
+            {{ form.wake_window_length_value_min(size=5) }}
+            {% for error in form.wake_window_length_value_min.errors %}
+            <br><span style="color: red;">[{{ error }}]</span><br> {% endfor %}
+            
+             to
+            {{ form.wake_window_length_value_max(size=5) }}
+            {% for error in form.wake_window_length_value_max.errors %}
+            <br><span style="color: red;">[{{ error }}]</span><br> {% endfor %}
+            
+            
+            {{ form.wake_window_length_label(size=10) }}
+            {% for error in form.wake_window_length_label.errors %}
+            <br><span style="color: red;">[{{ error }}]</span><br> {% endfor %}
+            
+            
+        </p>
+            <h3>Nap lengths (required)</h3><p>
+            {{ form.nap_length_value_min(size=5) }}
+            {% for error in form.nap_length_value_min.errors %}
+            <br><span style="color: red;">[{{ error }}]</span><br> {% endfor %}
+            
+             to
+            {{ form.nap_length_value_max(size=5) }}
+            {% for error in form.nap_length_value_max.errors %}
+            <br><span style="color: red;">[{{ error }}]</span><br> {% endfor %}
+            
+            {{ form.nap_length_label(size=10) }}
+            {% for error in form.nap_length_label.errors %}
+            <br><span style="color: red;">[{{ error }}]</span><br> {% endfor %}
+            
+        </p>
+            <h3>Preferred Bedtime?</h3><p>
+            {{ form.earliest_bedtime.label }}
+            {{ form.earliest_bedtime(size=10) }}
+            {% for error in form.earliest_bedtime.errors %}
+            <br><span style="color: red;">[{{ error }}]</span><br> {% endfor %}
+        <br>
+            {{ form.latest_bedtime.label }}
+            {{ form.latest_bedtime(size=10) }}
+            {% for error in form.latest_bedtime.errors %}
+            <br><span style="color: red;">[{{ error }}]</span><br> {% endfor %}
+        </p>
+            <h3>Details of most recent nap</h3><p>
+            {{ form.last_nap_start_time.label }}
+            {{ form.last_nap_start_time(size=10) }}
+            {% for error in form.last_nap_start_time.errors %}
+            <br><span style="color: red;">[{{ error }}]</span><br> {% endfor %}
+        <br>
+            {{ form.last_nap_still_ongoing.label }}
+            {{ form.last_nap_still_ongoing(size=10) }}
+            {% for error in form.last_nap_still_ongoing.errors %}
+            <br><span style="color: red;">[{{ error }}]</span><br> {% endfor %}
+        <br>
+            {{ form.last_nap_end_time.label }}
+            {{ form.last_nap_end_time(size=10) }}
+            {% for error in form.last_nap_end_time.errors %}
+            <br><span style="color: red;">[{{ error }}]</span><br> {% endfor %}
+        </p>
+            <h3>Optional Parameters</h3><p>
+            {{ form.possible_num_naps.label }}<br>
+            {{ form.possible_num_naps(size=5) }}
+        </p>
+        <p>
+            {{ form.round_times_by.label }}
+            {{ form.round_times_by(size=10) }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+
+
+    {% if message %}
+    <h1>Generated Nap Possibilities</h1>
+    <p>{{ message }}</p>
+    <p>{{ table|safe }}</p>
+    {% endif %}
+
+{% endblock %}
